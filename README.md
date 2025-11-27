@@ -27,6 +27,25 @@
 - **Data Fetching**: React Query (TanStack Query) + Axios
 - **Icons**: lucide-react
 ---
+## 실행 방법 (How to Run)
+```javascript
+# 1. 의존성 설치
+npm install
+# 또는
+yarn
+pnpm install
+
+# 2. 개발 서버 실행
+npm run dev
+# → http://localhost:3000
+```
+## 환경변수  (.env 파일)
+```javascript
+// .env
+NEXT_PUBLIC_API=https://recruit.paysbypays.com/api/v1
+```
+
+
 
 ## 3. API 사용 (API Usage)
 
@@ -208,15 +227,3 @@ React Query
 
 ----
 
-## 8. 실행 방법 (How to Run)
-```javascript
-# 1. 의존성 설치
-npm install
-# 또는
-yarn
-pnpm install
-
-# 2. 개발 서버 실행
-npm run dev
-# → http://localhost:3000
-```
