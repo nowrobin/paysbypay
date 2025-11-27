@@ -1,7 +1,3 @@
+import Card from '@/app/merchants/component/card';
 
-
-export default function Home() {
-  return (
-    <div><div></div></div>
-  )
-}
+export default function Home() {}
