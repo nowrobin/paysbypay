@@ -1,5 +1,3 @@
-// src/lib/date.ts
-
 export function formatDateToYMD(iso: string | Date | null | undefined) {
   if (!iso) return '-';
 

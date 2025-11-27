@@ -2,51 +2,54 @@
 
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
-import type { MerchantSortType } from '@/utils/merchants-sort';
 
-type Props = {
-  value: MerchantSortType;
-  onChange: (value: MerchantSortType) => void;
+export type DropdownOption<T extends string> = {
+  value: T;
+  label: string;
 };
 
-const SORT_LABEL_MAP: Record<MerchantSortType, string> = {
-  REGISTERED_NEWEST: '등록일 최신순',
-  REGISTERED_OLDEST: '등록일 오래된순',
-  UPDATED_NEWEST: '업데이트 최신순',
-  UPDATED_OLDEST: '업데이트 오래된순',
-  NAME_ASC: '가나다 순',
+type SortDropdownProps<T extends string> = {
+  value: T;
+  onChange: (value: T) => void;
+  options: DropdownOption<T>[];
+  prefixLabel?: string;
+  className?: string;
 };
 
-const OPTIONS: { value: MerchantSortType; label: string }[] = [
-  { value: 'REGISTERED_NEWEST', label: '등록일 최신순' },
-  { value: 'REGISTERED_OLDEST', label: '등록일 오래된순' },
-  { value: 'UPDATED_NEWEST', label: '업데이트 최신순' },
-  { value: 'UPDATED_OLDEST', label: '업데이트 오래된순' },
-  { value: 'NAME_ASC', label: '가나다 순' },
-];
-
-function MerchantSortDropdown({ value, onChange }: Props) {
+export function SortDropdown<T extends string>({
+  value,
+  onChange,
+  options,
+  prefixLabel = '정렬:',
+  className,
+}: SortDropdownProps<T>) {
   const [open, setOpen] = useState(false);
+  const current = options.find(o => o.value === value);
 
   return (
-    <div className="relative inline-block">
+    <div className={`relative inline-block ${className ?? ''}`}>
       <button
         type="button"
         onClick={() => setOpen(prev => !prev)}
         className="
           inline-flex items-center justify-between
+          min-w-[140px]
           rounded-lg border border-slate-300 bg-white
           px-3 py-2
+          text-xs sm:text-sm
           shadow-sm
           hover:bg-slate-50
           focus:outline-none focus:ring-2 focus:ring-blue-200
         "
       >
-        <span className="text-slate-700">정렬: {SORT_LABEL_MAP[value]}</span>
+        <span className="text-slate-700 truncate">
+          {prefixLabel} {current?.label ?? ''}
+        </span>
         <ChevronDown
           className={`ml-2 h-4 w-4 text-slate-500 transition-transform ${open ? 'rotate-180' : ''}`}
         />
       </button>
+
       {open && (
         <div
           className="
@@ -56,8 +59,8 @@ function MerchantSortDropdown({ value, onChange }: Props) {
             shadow-lg
           "
         >
-          <ul className="py-1">
-            {OPTIONS.map(option => (
+          <ul className="py-1 text-xs sm:text-sm">
+            {options.map(option => (
               <li key={option.value}>
                 <button
                   type="button"
@@ -85,5 +88,3 @@ function MerchantSortDropdown({ value, onChange }: Props) {
     </div>
   );
 }
-
-export default MerchantSortDropdown;

@@ -23,12 +23,3 @@ export interface Payment {
   status: PaymentStatusType;
   paymentAt: IsoDateString;
 }
-
-export interface CancelPaymentRequest {
-  reason: string;
-}
-
-export interface CancelPaymentResponse {
-  success: boolean;
-  payment: Payment;
-}

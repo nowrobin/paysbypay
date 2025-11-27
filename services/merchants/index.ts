@@ -1,26 +1,8 @@
 // src/api/merchants.ts
 import { api } from '@/utils/api';
 import type { ApiResponse } from '@/types/common';
-import type {
-  MerchantStatus,
-  MerchantListItem,
-  MerchantDetail,
-  CreateMerchantRequest,
-  CreateMerchantResponse,
-  UpdateMerchantStatusRequest,
-  UpdateMerchantStatusResponse,
-} from '@/types/merchants';
-
-/**
- * 실제 엔드포인트 이름은 스펙에 맞춰 수정해줘!
- * 여기선 예시로:
- *  - GET /merchants/statuses
- *  - GET /merchants
- *  - GET /merchants/details
- *  - GET /merchants/{mchtCode}
- *  - POST /merchants
- *  - PATCH /merchants/{mchtCode}/status
- */
+import type { MerchantStatus, MerchantListItem, MerchantDetail } from '@/types/merchants';
+import { Payment } from '@/types/payments';
 
 export async function getMerchantStatuses(): Promise<MerchantStatus[]> {
   const res = await api.get<ApiResponse<MerchantStatus[]>>('/merchants/statuses');
@@ -28,7 +10,7 @@ export async function getMerchantStatuses(): Promise<MerchantStatus[]> {
 }
 
 export async function getMerchants(): Promise<MerchantListItem[]> {
-  const res = await api.get<ApiResponse<MerchantListItem[]>>('/merchants');
+  const res = await api.get<ApiResponse<MerchantListItem[]>>('/merchants/list');
   return res.data.data;
 }
 
@@ -37,27 +19,17 @@ export async function getMerchantDetails(): Promise<MerchantDetail[]> {
   return res.data.data;
 }
 
-export async function getMerchantDetail(mchtCode: string): Promise<MerchantDetail> {
-  const res = await api.get<ApiResponse<MerchantDetail>>(`/merchants/${mchtCode}`);
-  return res.data.data;
-}
+export async function getMerchantDetail(mchtCode: string): Promise<{
+  merchant: MerchantDetail;
+  payments: Payment[];
+}> {
+  const [merchantRes, paymentRes] = await Promise.all([
+    api.get<ApiResponse<MerchantDetail>>(`/merchants/details/${mchtCode}`),
+    api.get<ApiResponse<Payment[]>>('/payments/list'),
+  ]);
 
-// MSW로 가짜 구현할 POST
-export async function postCreateMerchant(
-  body: CreateMerchantRequest,
-): Promise<CreateMerchantResponse> {
-  const res = await api.post<ApiResponse<CreateMerchantResponse>>('/merchants', body);
-  return res.data.data;
-}
-
-// MSW로 가짜 구현할 PATCH
-export async function patchMerchantStatus(
-  mchtCode: string,
-  body: UpdateMerchantStatusRequest,
-): Promise<UpdateMerchantStatusResponse> {
-  const res = await api.patch<ApiResponse<UpdateMerchantStatusResponse>>(
-    `/merchants/${mchtCode}/status`,
-    body,
-  );
-  return res.data.data;
+  return {
+    merchant: merchantRes.data.data,
+    payments: paymentRes.data.data.filter(value => value.mchtCode === mchtCode),
+  };
 }

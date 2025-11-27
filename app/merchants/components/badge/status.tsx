@@ -16,7 +16,7 @@ function MerchantStatusBadge({ status }: { status: MerchantStatusType }) {
   } as const;
 
   return (
-    <span className={` text-center px-2 py-0.5 rounded-xl ${colorMap[status]}`}>
+    <span className={`w-20 text-center px-2 py-0.5 rounded-xl ${colorMap[status]}`}>
       {textMap[status]}
     </span>
   );

@@ -1,24 +1,13 @@
-// src/hooks/useMerchants.ts
 'use client';
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import {
   getMerchantStatuses,
   getMerchants,
   getMerchantDetails,
   getMerchantDetail,
-  postCreateMerchant,
-  patchMerchantStatus,
 } from '@/services/merchants';
 
-import type {
-  CreateMerchantRequest,
-  CreateMerchantResponse,
-  UpdateMerchantStatusRequest,
-  UpdateMerchantStatusResponse,
-} from '@/types/merchants';
-
-// 가맹점 상태 코드 목록
 export function useMerchantStatuses() {
   return useQuery({
     queryKey: ['merchantStatuses'],
@@ -27,7 +16,6 @@ export function useMerchantStatuses() {
   });
 }
 
-// 가맹점 리스트 (간단 정보)
 export function useMerchants() {
   return useQuery({
     queryKey: ['merchants'],
@@ -36,7 +24,6 @@ export function useMerchants() {
   });
 }
 
-// 가맹점 전체 상세
 export function useMerchantDetails() {
   return useQuery({
     queryKey: ['merchantDetails'],
@@ -45,7 +32,6 @@ export function useMerchantDetails() {
   });
 }
 
-// 단일 가맹점 상세
 export function useMerchantDetail(mchtCode: string | undefined) {
   return useQuery({
     queryKey: ['merchantDetail', mchtCode],
@@ -56,30 +42,3 @@ export function useMerchantDetail(mchtCode: string | undefined) {
     enabled: !!mchtCode,
   });
 }
-
-// 가맹점 생성 mutation
-// export function useCreateMerchant() {
-//   const queryClient = useQueryClient();
-
-//   return useMutation<CreateMerchantResponse, Error, CreateMerchantRequest>({
-//     mutationFn: postCreateMerchant,
-//     onSuccess: () => {
-//       queryClient.invalidateQueries({ queryKey: ['merchants'] });
-//       queryClient.invalidateQueries({ queryKey: ['merchantDetails'] });
-//     },
-//   });
-// }
-
-// 가맹점 상태 변경 mutation
-// export function useUpdateMerchantStatus(mchtCode: string) {
-//   const queryClient = useQueryClient();
-
-//   return useMutation<UpdateMerchantStatusResponse, Error, UpdateMerchantStatusRequest>({
-//     mutationFn: body => patchMerchantStatus(mchtCode, body),
-//     onSuccess: () => {
-//       queryClient.invalidateQueries({ queryKey: ['merchants'] });
-//       queryClient.invalidateQueries({ queryKey: ['merchantDetails'] });
-//       queryClient.invalidateQueries({ queryKey: ['merchantDetail', mchtCode] });
-//     },
-//   });
-// }
