@@ -1,8 +1,8 @@
 'use client';
-import Card from '@/app/merchants/components/card';
-import MerchantModal from '@/app/merchants/components/modal';
-import MerchantSortDropdown from '@/app/merchants/components/sortDropDown';
-import MerchantStats from '@/app/merchants/components/stats';
+import Card from '@/components/merchants/card';
+import MerchantModal from '@/components/merchants/modal';
+import MerchantSortDropdown from '@/components/merchants/sortDropDown';
+import MerchantStats from '@/components/merchants/stats';
 import { useMerchantDetails } from '@/hooks/merchants/useMerchants';
 import { filterMerchantList, MerchantFilterState } from '@/utils/merchants-filter';
 import { MerchantSortType, sortMerchants } from '@/utils/merchants-sort';

@@ -1,5 +1,5 @@
-import MerchantStatusBadge from '@/app/merchants/components/badge/status';
-import PaymentStatusBadge from '@/app/payments/components/badge';
+import MerchantStatusBadge from '@/components/merchants/badge/status';
+import PaymentStatusBadge from '@/components/payments/badge';
 import { useMerchantDetail } from '@/hooks/merchants/useMerchants';
 import { formatDateToYMD } from '@/utils/date';
 import { Store, X } from 'lucide-react';
@@ -11,7 +11,7 @@ type MerchantModal = {
 };
 
 function MerchantModal({ mchtCode, setModalOpen }: MerchantModal) {
-  const { data, isLoading, isError } = useMerchantDetail(mchtCode);
+  const { data } = useMerchantDetail(mchtCode);
   if (!data?.merchant || !data?.payments) {
     return <div>로딩중...</div>;
   }

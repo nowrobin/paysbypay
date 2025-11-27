@@ -4,8 +4,8 @@
 import { useMemo, useState } from 'react';
 import { usePayments } from '@/hooks/payments/usePayments';
 import { formatDateToYMD } from '@/utils/date'; // 아까 만든 유틸
-import PaymentStatusBadge from '@/app/payments/components/badge';
-import { SortDropdown, type DropdownOption } from '@/shared/ui/dropdown';
+import PaymentStatusBadge from '@/components/payments/badge';
+import { SortDropdown, type DropdownOption } from '@/components/shared/dropdown';
 import type {
   PaymentFilterState,
   PaymentStatusFilter,

@@ -1,7 +1,7 @@
 'use client';
 
 import type { PaymentSortType } from '@/utils/payments-sort';
-import { DropdownOption, SortDropdown } from '@/shared/ui/dropdown';
+import { DropdownOption, SortDropdown } from '@/components/shared/dropdown';
 
 type Props = {
   value: PaymentSortType;

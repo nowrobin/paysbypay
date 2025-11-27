@@ -1,4 +1,4 @@
-import MerchantStatusBadge from '@/app/merchants/components/badge/status';
+import MerchantStatusBadge from '@/components/merchants/badge/status';
 import { MerchantDetail } from '@/types/merchants';
 import { formatDateToYMD } from '@/utils/date';
 import { Store } from 'lucide-react';

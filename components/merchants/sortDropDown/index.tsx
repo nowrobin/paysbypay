@@ -1,6 +1,6 @@
 'use client';
 import type { MerchantSortType } from '@/utils/merchants-sort';
-import { SortDropdown, DropdownOption } from '@/shared/ui/dropdown';
+import { SortDropdown, DropdownOption } from '@/components/shared/dropdown';
 
 type Props = {
   value: MerchantSortType;

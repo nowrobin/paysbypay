@@ -1,7 +1,7 @@
 'use client';
 
-import MerchantStatusBadge from '@/app/merchants/components/badge/status';
-import PaymentStatusBadge from '@/app/payments/components/badge';
+import MerchantStatusBadge from '@/components/merchants/badge/status';
+import PaymentStatusBadge from '@/components/payments/badge';
 import { useMerchantDetails, useMerchants } from '@/hooks/merchants/useMerchants';
 import { usePayments } from '@/hooks/payments/usePayments';
 import { formatDateToYMD } from '@/utils/date';
