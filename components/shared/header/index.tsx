@@ -8,7 +8,7 @@ function Header() {
         <div className="text-xl font-bold">ALLPAYS</div>
         <Link href="/">대시보드</Link>
         <Link href="/merchants">가맹점</Link>
-        <Link href="/payments">개래 내역</Link>
+        <Link href="/payments">거래 내역</Link>
       </nav>
       <div className="flex flex-row gap-4">
         <Image src={'/globe.svg'} alt={''} width={28} height={28}></Image>
